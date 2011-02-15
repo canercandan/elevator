@@ -1,0 +1,21 @@
+ELEVATOR
+~~~~~~~~
+
+How to build the project
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+The project uses CMake, so just install cmake on your distribution and then use one of the scripts available at the root of the project, depending on what type of build you which:
+
+For Release compilation:
+
+    Use ./build_gcc_linux_release
+
+    A folder called "release" must be generated containing the binary some other useful files like samples.
+
+For Debug compilation:
+
+    Use ./build_gcc_linux_release
+
+    A folder called "debug" must be generated containing the binary some other useful files like samples.
+
+HF!
