@@ -17,29 +17,27 @@
  * Caner Candan <caner@candan.fr>, http://caner.candan.fr
  */
 
-#ifndef _Scheduler_h
-#define _Scheduler_h
+#include <iostream>
 
-#include "Move.h"
-#include "ScheduleData.h"
+#include "Scheduler.h"
 
-class Scheduler
+Scheduler::Scheduler( Move& move ) : _move( move ) {}
+
+void Scheduler::operator()( ScheduleData data ) const
 {
-public:
-    Scheduler( Move& move );
+    for ( size_t i = 0, size = data.size(); i < size; ++i )
+	{
+	    _move( data[i] );
+	}
+}
 
-    virtual void operator()( ScheduleData data ) const;
+LoopScheduler::LoopScheduler( Move& move ) : Scheduler( move ) {}
 
-private:
-    Move& _move;
-};
-
-class LoopScheduler : public Scheduler
+void LoopScheduler::operator()( ScheduleData data ) const
 {
-public:
-    LoopScheduler( Move& move );
-
-    virtual void operator()( ScheduleData data ) const;
-};
-
-#endif // !_Scheduler_h
+    while ( 42 )
+	{
+	    Scheduler::operator()( data );
+	    std::cout << "Press CTRL+C to stop the loop..." << std::endl;
+	}
+}
