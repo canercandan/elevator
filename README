@@ -4,7 +4,7 @@ ELEVATOR
 How to build the project
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-The project uses CMake, so just install cmake on your distribution and then use one of the scripts available at the root of the project, depending on what type of build you which:
+The project uses CMake, so just install cmake on your distribution and then use one of the scripts available at the root of the project, depending on what type of build you wish:
 
 For Release compilation:
 
