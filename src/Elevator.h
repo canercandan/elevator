@@ -30,16 +30,23 @@ public:
 class EasyElevator : public Elevator
 {
 public:
-    EasyElevator( int initial_position, int max, int min = 0 ) : _position( initial_position ), _max( max), _min( min ) {}
+    EasyElevator( int initial_position = 0 ) : _position( initial_position ) {}
 
     inline int& position() { return _position; }
-    inline int max() const { return _max; }
-    inline int min() const { return _min; }
 
 private:
     int _position;
-    int _max;
-    int _min;
+};
+
+class OpenCloseElevator : public EasyElevator
+{
+public:
+    OpenCloseElevator( int initial_position = 0 ) : EasyElevator( initial_position ), _open( false ) {}
+
+    inline bool& open() { return _open; }
+
+private:
+    bool _open;
 };
 
 #endif // !_Elevator_h

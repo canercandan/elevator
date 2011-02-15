@@ -39,7 +39,7 @@ int main(int ac, char **av)
     ScheduleSampler sampler( av[1] );
 
     /// used to define a kind of elevator
-    EasyElevator elevator( initial_position, 0 );
+    EasyElevator elevator( initial_position );
 
     /// used to control the behaviour during a motion between two levels
     /// here's the motion with anything else
