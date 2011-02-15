@@ -1,0 +1,8 @@
+digraph G {
+  "Load sample" -> "Loop on all\nt(x)" -> "Next t(x) ?"
+  "Next t(x) ?" -> "Manage simultanious\ncalls to elevator\n(Ordered or UpDown)" -> "Next call ?"
+  "Next t(x) ?"
+  "Next call ?" -> "Move elevator\n(Temporized or not)"
+  "Move elevator\n(Temporized or not)" -> "Change elevator\nposition\nChange call state" -> "Next call ?"
+  "Next call ?" -> "Next t(x) ?"
+}

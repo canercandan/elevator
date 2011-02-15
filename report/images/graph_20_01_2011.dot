@@ -1,0 +1,17 @@
+// digraph G {
+// "0\nEtat initial" -> "1\nBande noire" [label="N"]
+// "0\nEtat initial" -> "0\nEtat initial" [label="B"]
+// "1\nBande noire" -> "1\nBande noire" [label="N"]
+// "Après\n1 = b. N" -> "Après\n1 = b. N" [label="B"]
+// "0\nEtat initial" -> "Après\n1 = b. N" [label="B"]
+// }
+
+digraph A {
+"BX\nEtat 0" -> {"Etage Haut Demandé\nOut:\nEtage \[X+1 ... MAXETAGE-1\]" "Etage Bas Demandé\nOut:\nEtage \[0 ... X-1\]"} [label="X"]
+{"Etage Haut Demandé\nOut:\nEtage \[X+1 ... MAXETAGE-1\]" "Etage Bas Demandé\nOut:\nEtage \[0 ... X-1\]"} -> "Aller" [label="new X"]
+"Aller" -> "Change Etat" -> "B new X\nEtat 1->0"
+"Position"
+"Sens"
+"Haut/Bas"
+"Aucune demande"
+}
