@@ -21,26 +21,42 @@
 #define _Move_h
 
 #include "Elevator.h"
+#include "OneMove.h"
+#include "ScheduleData.h"
 
-class IMove
+class Move
 {
 public:
-    virtual ~IMove() {}
-    virtual void operator()( int position ) = 0;
+    virtual ~Move() {}
+    virtual void operator()( ScheduleData::SubContainer& ) = 0;
 };
 
-class MoveTemp : public IMove
+class OrderedMove : public Move
 {
 public:
-    MoveTemp( IElevator& elevator, int max, int min = 0, int timeout = 1 );
+    OrderedMove( Elevator& elevator, OneMove& onemove );
 
-    void operator()( int position );
+    void operator()( ScheduleData::SubContainer& );
 
 private:
-    IElevator& _elevator;
-    int _max;
-    int _min;
-    int _timeout;
+    Elevator& _elevator;
+    OneMove& _onemove;
+};
+
+class UpDownMove : public Move
+{
+public:
+    UpDownMove( Elevator& elevator, OneMove& onemove, bool direction = 1 );
+
+    void operator()( ScheduleData::SubContainer& );
+
+    void upper( ScheduleData::SubContainer& );
+    void lower( ScheduleData::SubContainer& );
+
+private:
+    Elevator& _elevator;
+    OneMove& _onemove;
+    bool _direction;
 };
 
 #endif // !_Move_h

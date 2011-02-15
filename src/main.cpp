@@ -29,24 +29,47 @@ int main(int ac, char **av)
 {
     if (ac < 2)
 	{
-	    std::cout << "Usage: " << av[0] << " INITIAL_POTISION SAMPLE_FILE" << std::endl;
+	    std::cout << "Usage: " << av[0] << " SAMPLE_FILE [INITIAL_POTISION]" << std::endl;
 	    return -1;
 	}
 
-    Elevator elevator( ::atoi( av[1] ), 0 );
-    MoveTemp move( elevator, 5 );
-    Scheduler scheduler( move );
-    ScheduleSampler sampler( av[2] );
+    int initial_position = ac > 2 ? ::atoi( av[2] ) : 0;
 
+    /// used to read a filename containing the elevator calls scheduling
+    ScheduleSampler sampler( av[1] );
+
+    /// used to define a kind of elevator
+    EasyElevator elevator( initial_position, 0 );
+
+    /// used to control the behaviour during a motion between two levels
+    /// here's the motion with anything else
+    //DummyOneMove onemove;
+    /// here's the temporized motion with 5 seconds of sleep
+    TemporizedOneMove onemove( 1 );
+
+    /// used to manage elevator motions when several levels are called at the same time
+    /// here's an easy method listing and executing all motions in the list order
+    //OrderedMove move( elevator, onemove );
+    /// here's the behaviour checking first the higher levels and then the lower ones
+    UpDownMove move( elevator, onemove );
+
+    /// used to execute scheduling
+    // here's the way without restarts
+    Scheduler scheduler( move );
+    // here's the scheduler into a infinity loop
+    //LoopScheduler scheduler( move );
+
+    /// just store the data related with scheduling
     ScheduleData data = sampler();
 
-    std::cout << data;
+    /// print the scheduling
+    std::cout << "///// Scheduling /////" << std::endl
+	      << data
+	      << "//////////////////////" << std::endl;
+    std::cout << std::endl;
 
-    // while (42)
-    // 	{
+    /// and finally execute the program with all parameters defined above.
     scheduler( data );
-    //     std::cout << "Press CTRL+C to stop the loop..." << std::endl;
-    // }
 
     return (0);
 }

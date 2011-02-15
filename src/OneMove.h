@@ -17,19 +17,33 @@
  * Caner Candan <caner@candan.fr>, http://caner.candan.fr
  */
 
-#include "ScheduleData.h"
+#ifndef _OneMove_h
+#define _OneMove_h
 
-ScheduleData::ScheduleData() : Container(1) {}
+#include "Elevator.h"
 
-void ScheduleData::printOn( std::ostream& os ) const
+class OneMove
 {
-    for ( size_t i = 0, size = this->size(); i < size; ++i )
-	{
-	    std::cout << "t(" << i << ") = ";
-	    for ( SubContainer::const_iterator it = (*this)[i].begin(), end = (*this)[i].end(); it != end; ++it )
-		{
-		    std::cout << it->first << " ";
-		}
-	    std::cout << std::endl;
-	}
-}
+public:
+    virtual ~OneMove() {}
+    virtual void operator()( Elevator&, int position ) = 0;
+};
+
+class DummyOneMove : public OneMove
+{
+public:
+    void operator()( Elevator&, int position );
+};
+
+class TemporizedOneMove : public OneMove
+{
+public:
+    TemporizedOneMove( int timeout = 1 );
+
+    void operator()( Elevator&, int position );
+
+private:
+    int _timeout;
+};
+
+#endif // !_OneMove_h

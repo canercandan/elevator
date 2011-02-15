@@ -20,17 +20,17 @@
 #ifndef _Elevator_h
 #define _Elevator_h
 
-class IElevator
+class Elevator
 {
 public:
-    virtual ~IElevator() {}
+    virtual ~Elevator() {}
     virtual int& position() = 0;
 };
 
-class Elevator : public IElevator
+class EasyElevator : public Elevator
 {
 public:
-    Elevator( int initial_position, int max, int min = 0 ) : _position( initial_position ), _max( max), _min( min ) {}
+    EasyElevator( int initial_position, int max, int min = 0 ) : _position( initial_position ), _max( max), _min( min ) {}
 
     inline int& position() { return _position; }
     inline int max() const { return _max; }

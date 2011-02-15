@@ -20,27 +20,41 @@
 #ifndef _Scheduler_h
 #define _Scheduler_h
 
+#include <iostream>
+
 #include "Move.h"
 #include "ScheduleData.h"
 
 class Scheduler
 {
 public:
-    Scheduler( IMove& move ) : _move( move ) {}
+    Scheduler( Move& move ) : _move( move ) {}
 
-    virtual void operator()( const ScheduleData data ) const
+    virtual void operator()( ScheduleData data ) const
     {
 	for ( size_t i = 0, size = data.size(); i < size; ++i )
 	    {
-		for ( ScheduleData::SubContainer::const_iterator it = data[i].begin(), end = data[i].end(); it != end; ++it )
-		    {
-			_move(it->first);
-		    }
+		_move( data[i] );
 	    }
     }
 
 private:
-    IMove& _move;
+    Move& _move;
+};
+
+class LoopScheduler : public Scheduler
+{
+public:
+    LoopScheduler( Move& move ) : Scheduler( move ) {}
+
+    virtual void operator()( ScheduleData data ) const
+    {
+	while ( 42 )
+	    {
+		Scheduler::operator()( data );
+		std::cout << "Press CTRL+C to stop the loop..." << std::endl;
+	    }
+    }
 };
 
 #endif // !_Scheduler_h
