@@ -63,7 +63,7 @@ Ce composant représente l'ascenseur en lui même. Il est possible d'intégrer p
 
 \paragraph{\em Move}
 
-Ce composant gére les appels simultannés à l'ascenseur puis délégue son déplacement vers une autre famille de composant {\em OneMove}. Ci-dessous une liste de ses composants.\\
+Ce composant gère les appels simultanés à l'ascenseur puis délègue son déplacement vers une autre famille de composant {\em OneMove}. Ci-dessous une liste de ses composants.\\
 
 \begin{itemize}
 \item {\em OrderedMove}, ce gestionnaire de mouvement effectue les déplacements à travers les étages demandés de manière ordonnée.\\
@@ -84,7 +84,7 @@ Ce composant effectue le déplacement d'un étage initial vers un étage cible. 
 Ce composant permet la lecture d'un fichier contenant le scénario à jouer par le simulateur. Nous présentons dans le code \ref{sample_example} un exemple d'échantillon.
 
 \begin{algorithm}[h]
-  \caption{Exemple de fichier de scénario executable par le simulateur \elevator}
+  \caption{Exemple de fichier de scénario exécutable par le simulateur \elevator}
   \label{sample_example}
 \begin{verbatim}
 0 10 20 -50
@@ -100,15 +100,15 @@ Chaque ligne du fichier représente un temps $t$ et à chaque temps $t$ il est p
 
 \paragraph{\em Scheduler}
 
-Il existe une composante principale du simulateur, il s'agit du {\em Scheduler} qui utilise l'ensemble des composants cités précédement à travers un jeu de paramètrage, y compris le scénario à jouer, et lance la simulation. Ci-dessous la liste de ses composants.\\
+Il existe une composante principale du simulateur, il s'agit du {\em Scheduler} qui utilise l'ensemble des composants cités précédemment à travers un jeu de paramétrage, y compris le scénario à jouer, et lance la simulation. Ci-dessous la liste de ses composants.\\
 
 \begin{itemize}
-\item {\em LoopScheduler}, juste une variante executant le scénario en boucle.
+\item {\em LoopScheduler}, juste une variante exécutant le scénario en boucle.
 \end{itemize}
 
 \section{L'assemblage}
 
-L'assemble consiste à regrouper les différents composants présentés et former le simulateur souhaité.
+L'assemblage consiste à regrouper les différents composants présentés et former le simulateur souhaité.
 
 \paragraph{Exemple d'assemblage des composants}
 
@@ -130,7 +130,7 @@ int main(void)
 \end{verbatim}
 \end{algorithm}
 
-Ce code illustre l'utilisation par le simulateur d'un échantillon de scénario ``hard1.sdl''\footnote{Présenté dans le code \ref{sample_example}}, d'un ascenseur simple, d'une temporisation des déplacements de l'ascenseur, d'un gestionnaire de déplacement privilégiant les déplacements vers le haut puis vers le bas puis finalement d'une execution du scénario.
+Ce code illustre l'utilisation par le simulateur d'un échantillon de scénario ``hard1.sdl''\footnote{Présenté dans le code \ref{sample_example}}, d'un ascenseur simple, d'une temporisation des déplacements de l'ascenseur, d'un gestionnaire de déplacement privilégiant les déplacements vers le haut puis vers le bas puis finalement d'une exécution du scénario.
 
 \paragraph{Par défaut}
 
@@ -141,7 +141,7 @@ Certains paramètres ne sont pas définit dans le code, ils restent toutefois d�
 Le code \ref{exemple_execution} illustre des résultats d'exécution obtenus avec le même échantillon présenté dans le code \ref{sample_example}.
 
 \begin{algorithm}[h]
-  \caption{Résultats obtenus après une execution du simulateur}
+  \caption{Résultats obtenus après une exécution du simulateur}
   \label{exemple_execution}
 \begin{verbatim}
 $> ./elevator samples/hard1.sdl
@@ -177,11 +177,11 @@ lower asked levels:
 \end{verbatim}
 \end{algorithm}
 
-Sur les premières lignes des résultats, apparait un rappel du scénario qui va être joué par le simulateur \elevator, chaque ligne représentant une unité de temps $t$. Commence alors la simulation. Comme nous utilisons le composant {\em UpDownMove}, nous pouvons confirmer, par les résultats, que la simulation commence à parcourir les étages supérieurs demandés. Puis après avoir parcourut tous les étages supérieurs, le simulateur s'attaque aux étages inférieurs. Les points intermédiaires entre étage sont générés par le composant {\em TemporizedOneMove} pour indiquer les coûts en pas de temps entre deux étages.
+Sur les premières lignes des résultats, apparaît un rappel du scénario qui va être joué par le simulateur \elevator, chaque ligne représentant une unité de temps $t$. Commence alors la simulation. Comme nous utilisons le composant {\em UpDownMove}, nous pouvons confirmer, par les résultats, que la simulation commence à parcourir les étages supérieurs demandés. Puis après avoir parcourut tous les étages supérieurs, le simulateur s'attaque aux étages inférieurs. Les points intermédiaires entre étage sont générés par le composant {\em TemporizedOneMove} pour indiquer les coûts en pas de temps entre deux étages.
 
 \section{Conclusion}
 
-Le simulateur \elevator\ a été conçu de manière à s'abstraire des specifications du système. Un langage plus approprié, comme ``SystemC'', aurait surement apporté un modèle plus optimal. Toutefois nous avons vu, à travers le design, qu'il est possible, en ayant une approche composant, d'interchanger les différents processus de notre système.\\
+Le simulateur \elevator\ a été conçu de manière à s'abstraire des spécifications du système. Un langage plus approprié, comme ``SystemC'', aurait sûrement apporté un modèle plus optimal. Toutefois nous avons vu, à travers le design, qu'il est possible, en ayant une approche composant, d'interchanger les différents processus de notre système.\\
 
 Ainsi libre à chacun de concevoir de nouveaux composants pour enrichir le simulateur avec de nouvelles fonctionnalités. L'ensemble du code du simulateur n'étant pas toute à fait générique, il reste des zones dans le code que l'on peut encore abstraire.\\
 
